@@ -1,3 +1,6 @@
+# virtual venv
+movie_recommender/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -40,7 +43,7 @@ htmlcov/
 .tox/
 .coverage
 .coverage.*
-.cache
+ngs.cache
 nosetests.xml
 coverage.xml
 *.cover
@@ -54,6 +57,7 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
+secret_settings.py
 db.sqlite3
 
 # Flask stuff:
