@@ -6,8 +6,10 @@ Backend of the movie recommender system
 First, install dependiencies: 
 
 	pip install -r requirments.txt
+	
+ and config the local settings and secret settings. There are examples for each setting file. The example of local settings is locate at `/recommender_backend/local_settings.py.example`; the example of secret settings is locate at `/recommender_backend/secret_settings.py.example`.
 
-, then create super user and build database:
+Next, create database and create super user:
 	
 	python3 manage.py migrate
 	python3 manage.py createsuperuser
