@@ -1,6 +1,10 @@
 # virtual venv
 movie_recommender/
 
+# movie data
+movies/movies.csv
+movies/trailers.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
