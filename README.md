@@ -13,3 +13,10 @@ Next, create database and create super user:
 	
 	python3 manage.py migrate
 	python3 manage.py createsuperuser
+	
+## Import Movie Data
+There is a script to import movie data into database. Place your `movies.csv` and `trailers.csv` in the movies module, and run
+
+	python3 manage.py shell < movies/import.py
+
+to import the movie data from Movielens.
