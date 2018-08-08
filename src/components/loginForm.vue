@@ -5,14 +5,13 @@
         <b-col sm></b-col>
         <b-col sm>
           <b-form>
-            <b-form-group label="Email" :state="emailState">
-              <b-form-input :state="emailState" type="email"></b-form-input>
+            <b-form-group label="Email" :state="email.state">
+              <b-form-input :state="email.state" type="email" v-model="email.email" @input="changeInput(email)"></b-form-input>
             </b-form-group>
-            <b-form-group label="Password" :state="passwordState">
-              <b-form-input :state="passwordState" type="password"></b-form-input>
+            <b-form-group label="Password" :state="password.state">
+              <b-form-input :state="password.state" type="password" v-model="password.password" @input="changeInput(password)"></b-form-input>
             </b-form-group>
             <slot></slot>
-            <b-button type="submit" variant="primary">Submit</b-button>
           </b-form>
         </b-col>
         <b-col sm></b-col>
@@ -22,7 +21,28 @@
 </template>
 <script>
 export default {
-  props: [ 'value' ]
+  props: [ 'value' ],
+  data: function () {
+    return {
+      email: {
+        state: null,
+        email: null
+      },
+      password: {
+        state: null,
+        password: null
+      }
+    }
+  },
+  methods: {
+    changeInput (obj) {
+      obj.state = null
+      this.$emit('input', {
+        email: this.email.email,
+        password: this.password.password
+      })
+    }
+  }
 }
 </script>
 <style scoped>
