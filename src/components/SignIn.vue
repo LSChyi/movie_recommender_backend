@@ -1,7 +1,14 @@
 <template>
   <div>
-    sign in
+    <login-form></login-form>
   </div>
 </template>
 <script>
+import LoginForm from '@/components/loginForm' 
+
+export default {
+  components: {
+    LoginForm
+  }
+}
 </script>
