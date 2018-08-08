@@ -4,10 +4,10 @@
     <h2>Based on 10M Movielens Dataset</h2>
     <ul>
       <li>
-        <a href="">Sign in</a>
+        <router-link :to="{ name: 'SignIn' }">Sign in</router-link>
       </li>
       <li>
-        <a href="">Sign up</a>
+        <router-link :to="{ name: 'SignUp' }">Sign up</router-link>
       </li>
     </ul>
   </div>

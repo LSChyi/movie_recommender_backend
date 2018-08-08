@@ -2,11 +2,11 @@
   <div id="app">
     <b-navbar toggleable="md" type="light" variant="light">
       <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
-      <b-navbar-brand href="#">Movie Recommender</b-navbar-brand>
+      <b-navbar-brand href="/">Movie Recommender</b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav class="ml-auto">
           <b-nav-item>
-            <a href="#">Sign in</a> or <a href="#">Sign up</a>
+            <router-link :to="{ name: 'SignIn' }">Sign in</router-link> or <router-link :to="{ name: 'SignUp' }">Sign up</router-link>
           </b-nav-item>
         </b-navbar-nav>
       </b-collapse>
