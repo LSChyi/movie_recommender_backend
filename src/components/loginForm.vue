@@ -26,21 +26,31 @@ export default {
     return {
       email: {
         state: null,
-        email: null
+        email: ''
       },
       password: {
         state: null,
-        password: null
+        password: ''
       }
     }
   },
   methods: {
     changeInput (obj) {
       obj.state = null
-      this.$emit('input', {
-        email: this.email.email,
-        password: this.password.password
-      })
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      if (re.test(this.email.email)) {
+        this.email.state = null
+        this.$emit('input', {
+          email: this.email.email,
+          password: this.password.password
+        })
+      } else {
+        this.email.state = false
+        this.$emit('input', {
+          email: '',
+          password: this.password.password
+        })
+      }
       this.$emit('resetBtn')
     }
   }
