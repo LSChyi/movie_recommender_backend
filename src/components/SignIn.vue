@@ -13,6 +13,7 @@
 <script>
 import LoginForm from '@/components/loginForm' 
 import SynchronizeButton from '@/components/SynchronizeButton'
+import axios from 'axios'
 
 export default {
   components: {
@@ -25,7 +26,10 @@ export default {
   },
   methods: {
     login () {
-      return this.$http.post('http://localhost:8000/rest-auth/login/')
+      return axios.post('http://localhost:8000/rest-auth/login/', {
+        email: this.login_info.email,
+        password: this.login_info.password
+      })
     }
   }
 }
