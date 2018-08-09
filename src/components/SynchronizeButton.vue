@@ -1,5 +1,5 @@
 <template>
-  <b-button :disabled="!isEable" :variant="variantType" @click="execClick" ref="button">
+  <b-button :disabled="!isEable" :variant="variantType" @click="execClick" ref="button" type="submit">
     <span v-if="btnStatus === 'loading'">
       <spinner></spinner>
       {{ loadingText }}

@@ -41,6 +41,7 @@ export default {
         email: this.email.email,
         password: this.password.password
       })
+      this.$emit('resetBtn')
     }
   }
 }

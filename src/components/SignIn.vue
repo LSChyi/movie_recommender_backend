@@ -1,11 +1,14 @@
 <template>
   <div>
-    <login-form v-model="login_info">
+    <login-form v-model="login_info" @resetBtn="$refs.submitBtn.resetBtn()">
       <synchronize-button
         normalText="Submit"
         defaultBtnVariant="primary"
         failText="Login Fail"
+        successText="Login success! redirecting..."
         :clickFn="login"
+        :enabled="(login_info.email && login_info.password) !== ''"
+        ref="submitBtn"
         ></synchronize-button>
     </login-form>
   </div>
@@ -23,14 +26,31 @@ export default {
   },
   data: function () {
     return {
-      login_info: {}
+      login_info: {
+        email: '',
+        password: ''
+      }
     }
   },
   methods: {
     login () {
-      return axios.post(`{API_BASE}/rest-auth/login/`, {
-        email: this.login_info.email,
-        password: this.login_info.password
+      return new Promise((resolve, reject) => {
+        axios.post(`${API_BASE}/rest-auth/login/`, {
+          email: this.login_info.email,
+          password: this.login_info.password
+        })
+          .then((res) => {
+            console.log(res)
+            resolve()
+          })
+          .catch((error) => {
+            if (error.response) {
+              if (error.response.data.non_field_errors) {
+                alert('Wrong email or password')
+              }
+            }
+            reject()
+          })
       })
     }
   }
