@@ -4,7 +4,9 @@
       <synchronize-button
         normalText="Submit"
         defaultBtnVariant="primary"
-        failText="Login Fail"></synchronize-button>
+        failText="Login Fail"
+        :clickFn="login"
+        ></synchronize-button>
     </login-form>
   </div>
 </template>
@@ -22,6 +24,9 @@ export default {
     }
   },
   methods: {
+    login () {
+      return this.$http.post('http://localhost:8000/rest-auth/login/')
+    }
   }
 }
 </script>
