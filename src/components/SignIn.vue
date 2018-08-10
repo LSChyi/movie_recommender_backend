@@ -19,8 +19,6 @@ import LoginForm from '@/components/loginForm'
 import SynchronizeButton from '@/components/SynchronizeButton'
 import axios from 'axios'
 
-const API_BASE = process.env.API_BASE
-
 export default {
   components: {
     LoginForm, SynchronizeButton
@@ -36,7 +34,7 @@ export default {
   methods: {
     login () {
       return new Promise((resolve, reject) => {
-        axios.post(`${API_BASE}/rest-auth/login/`, {
+        axios.post('/rest-auth/login/', {
           email: this.login_info.email,
           password: this.login_info.password
         })

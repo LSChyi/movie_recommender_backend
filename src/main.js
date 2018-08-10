@@ -10,7 +10,8 @@ import axios from 'axios'
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
+axios.defaults.baseURL = process.env.API_BASE
 
 /* eslint-disable no-new */
 new Vue({
