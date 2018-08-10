@@ -4,7 +4,7 @@
       <b-row class="justify-content-md-center">
         <b-col sm></b-col>
         <b-col sm>
-          <b-form>
+          <b-form @submit.prevent>
             <b-form-group label="Email" :state="email.state">
               <b-form-input :state="email.state" type="email" v-model="email.email" @input="changeInput(email)"></b-form-input>
             </b-form-group>

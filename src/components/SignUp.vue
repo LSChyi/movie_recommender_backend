@@ -12,6 +12,7 @@
         :clickFn="register"
         :enabled="(login_info.email && login_info.password && password_confirm) !== '' && confirmPassword"
         ref="submitBtn"
+        type="submit"
         ></synchronize-button>
     </login-form>
   </div>

@@ -9,6 +9,7 @@
         :clickFn="login"
         :enabled="(login_info.email && login_info.password) !== ''"
         ref="submitBtn"
+        type="submit"
         ></synchronize-button>
     </login-form>
   </div>

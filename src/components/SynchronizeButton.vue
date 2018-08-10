@@ -1,5 +1,5 @@
 <template>
-  <b-button :disabled="!isEable" :variant="variantType" @click="execClick" ref="button" type="submit">
+  <b-button :disabled="!isEable" :variant="variantType" @click="execClick" ref="button" :type="type">
     <span v-if="btnStatus === 'loading'">
       <spinner></spinner>
       {{ loadingText }}
@@ -36,6 +36,10 @@ export default {
     },
     clickFn: {
       type: Function
+    },
+    type: {
+      type: String,
+      default: "button"
     }
   },
   data () {
