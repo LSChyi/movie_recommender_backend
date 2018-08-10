@@ -5,9 +5,10 @@
       <b-navbar-brand :to="{ name: 'Welcome' }">Movie Recommender</b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav class="ml-auto">
-          <b-nav-item>
+          <b-nav-item v-if="!token">
             <router-link :to="{ name: 'SignIn' }">Sign in</router-link> or <router-link :to="{ name: 'SignUp' }">Sign up</router-link>
           </b-nav-item>
+          <b-nav-item @click="logout" v-else>Logout</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -18,7 +19,20 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data: function () {
+    return {
+      get token () {
+        return sessionStorage.getItem('token')
+      }
+    }
+  },
+  methods: {
+    logout () {
+      sessionStorage.removeItem('token')
+      this.$router.push({ name: 'Welcome' })
+    }
+  }
 }
 </script>
 
