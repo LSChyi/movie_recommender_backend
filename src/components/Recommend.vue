@@ -8,7 +8,7 @@
         <b-button @click="pause_resume">{{ pause_resume_display }}</b-button>
       </div>
       <b-card-group deck>
-        <movie v-for="movie in movies" :key="movie.id" :movie="movie"></movie>
+        <movie v-for="movie in movies" :key="movie.id" :movie="movie" @changeModal="pause_resume"></movie>
       </b-card-group>
     </b-container>
   </div>
