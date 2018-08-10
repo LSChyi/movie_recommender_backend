@@ -26,8 +26,7 @@ export default new Router({
       name: 'Recommend',
       component: Recommend,
       beforeEnter: (to, from, next) => {
-        if (!sessionStorage.getItem('token')) {
-          console.log('here')
+        if (!localStorage.getItem('token')) {
           next({ name: 'SignIn' })
         } else {
           next()

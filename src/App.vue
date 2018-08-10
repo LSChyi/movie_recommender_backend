@@ -18,19 +18,29 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'App',
   data: function () {
     return {
       get token () {
-        return sessionStorage.getItem('token')
+        return localStorage.getItem('token')
       }
+    }
+  },
+  created: function () {
+    if (localStorage.getItem('token')) {
+      axios.defaults.headers.common['Authorization'] = `Token ${localStorage.getItem('token')}`
+      this.$router.push({ name: 'Recommend' })
     }
   },
   methods: {
     logout () {
-      sessionStorage.removeItem('token')
+      localStorage.removeItem('token')
       this.$router.push({ name: 'Welcome' })
+      delete axios.defaults.headers.common['Authorization']
+      console.log(axios.defaults.headers.common['Authorization'])
     }
   }
 }

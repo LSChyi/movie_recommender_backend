@@ -39,8 +39,9 @@ export default {
           password: this.login_info.password
         })
           .then((res) => {
-            sessionStorage.setItem('token', res.data.key)
+            localStorage.setItem('token', res.data.key)
             this.$router.push({ name: 'Recommend' })
+            axios.defaults.headers.common['Authorization'] = `Token ${res.data.key}`
             resolve()
           })
           .catch((error) => {
