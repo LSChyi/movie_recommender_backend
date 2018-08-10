@@ -21,6 +21,17 @@
       hide-footer
       >
       <div class="d-block text-center">
+        <div style="margin: 12px">
+          <b-form-input type="range" max="5" min="1" v-model="score"></b-form-input>
+          score: {{ score }}
+          <br />
+          <synchronize-button
+            normalText="Rate It!"
+            successText="Movie Rated"
+            failText="Rate Fail"
+            :clickFn="rate_movie"
+            ></synchronize-button>
+        </div>
         <b-embed
           type="iframe"
           :src="'https://www.youtube.com/embed/' + trailer.youtube_id"
@@ -35,12 +46,17 @@
 
 <script>
 import axios from 'axios'
+import SynchronizeButton from '@/components/SynchronizeButton'
 
 export default {
   props: [ 'movie' ],
+  components: {
+    SynchronizeButton
+  },
   data: function () {
     return {
-      trailers: []
+      trailers: [],
+      score: 3,
     }
   },
   methods: {
@@ -54,6 +70,18 @@ export default {
     },
     hide_modal () {
       this.$emit('changeModal')
+    },
+    rate_movie () {
+      return new Promise((resolve, reject) => {
+        axios.post('/users/ratings/', {
+          movie: this.movie.id,
+          rating: this.score.toFixed(1)
+        })
+          .then((res) => {
+            this.$emit('movieRated', this.movie.id)
+            resolve()
+          })
+      })
     }
   }
 }

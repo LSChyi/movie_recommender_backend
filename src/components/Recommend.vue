@@ -8,7 +8,13 @@
         <b-button @click="pause_resume">{{ pause_resume_display }}</b-button>
       </div>
       <b-card-group deck>
-        <movie v-for="movie in movies" :key="movie.id" :movie="movie" @changeModal="pause_resume"></movie>
+        <movie
+          v-for="movie in movies"
+          :key="movie.id"
+          :movie="movie"
+          @changeModal="pause_resume"
+          @movieRated="removeMovie"
+          ></movie>
       </b-card-group>
     </b-container>
   </div>
@@ -77,6 +83,15 @@ export default {
         this.countdown.timer = null
       } else {
         this.count_minus()
+      }
+    },
+    removeMovie (movie_id) {
+      for (let i = 0; i < this.movies.length; ++i) {
+        if (this.movies[i].id == movie_id) {
+          this.movies.splice(i, 1)
+          this.pause_resume()
+          break
+        }
       }
     }
   }
