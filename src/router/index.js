@@ -28,7 +28,7 @@ export default new Router({
       beforeEnter: (to, from, next) => {
         if (!sessionStorage.getItem('token')) {
           console.log('here')
-          next({ name: 'Welcome' })
+          next({ name: 'SignIn' })
         } else {
           next()
         }

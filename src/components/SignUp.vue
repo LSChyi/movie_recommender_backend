@@ -54,8 +54,9 @@ export default {
           password: this.login_info.password
         })
           .then((res) => {
-            console.log(res)
             resolve()
+            alert('Register success! Now you can sign in the system')
+            this.$router.push({ name: 'SignIn' })
           })
           .catch((error) => {
             console.log(error)
