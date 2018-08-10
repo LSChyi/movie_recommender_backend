@@ -2,7 +2,7 @@
   <div id="app">
     <b-navbar toggleable="md" type="light" variant="light">
       <b-navbar-toggle target="nav_text_collapse"></b-navbar-toggle>
-      <b-navbar-brand href="/">Movie Recommender</b-navbar-brand>
+      <b-navbar-brand :to="{ name: 'Welcome' }">Movie Recommender</b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav class="ml-auto">
           <b-nav-item>
