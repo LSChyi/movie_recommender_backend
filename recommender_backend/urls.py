@@ -20,5 +20,6 @@ from rest_framework.authtoken import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('rest-auth/', include('rest_auth.urls')),
-    path('users/', include('users.urls'))
+    path('users/', include('users.urls')),
+    path('movies/', include('movies.urls')),
 ]
