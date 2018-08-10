@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Welcome from '@/components/Welcome'
 import SignIn from '@/components/SignIn'
 import SignUp from '@/components/SignUp'
+import Recommend from '@/components/Recommend'
 
 Vue.use(Router)
 
@@ -20,6 +21,18 @@ export default new Router({
       path: '/sign_up',
       name: 'SignUp',
       component: SignUp
+    }, {
+      path: '/recommend',
+      name: 'Recommend',
+      component: Recommend,
+      beforeEnter: (to, from, next) => {
+        if (!sessionStorage.getItem('token')) {
+          console.log('here')
+          next({ name: 'Welcome' })
+        } else {
+          next()
+        }
+      }
     }
   ]
 })

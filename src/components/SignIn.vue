@@ -41,7 +41,8 @@ export default {
           password: this.login_info.password
         })
           .then((res) => {
-            console.log(res)
+            sessionStorage.setItem('token', res.data.key)
+            this.$router.push({ name: 'Recommend' })
             resolve()
           })
           .catch((error) => {
