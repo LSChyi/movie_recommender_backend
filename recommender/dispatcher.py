@@ -10,12 +10,14 @@ app.conf.update(worker_concurrency=1, task_default_queue='dispatcher')
 @app.task
 def recommend(user_id):
     global user_items, model
+    user_id = user_id + user_offset
     l = model.recommend(userid=user_id, user_items=user_items, N=30)
     return list(map(lambda id: int(id[0]) , l))
 
 @app.task
 def add_rating(user_id, movie_id, rating):
     global ratings_df, queue, ratings, user_items
+    user_id = user_id + user_offset
     ratings_df = ratings_df.append(
         pd.DataFrame([{
             'user_id': user_id,
@@ -39,7 +41,6 @@ def run_runtine():
                 model.user_factors = user_factors
                 model.item_factors = item_factors
                 train_task = None
-
         if queue:
             train_task = train.apply_async((queue,), queue='trainer')
             # TODO save queue
@@ -48,6 +49,7 @@ def run_runtine():
 if __name__ == '__main__':
     import numpy as np
     import pandas as pd
+    import csv
     from scipy.sparse import coo_matrix
     from implicit.als import AlternatingLeastSquares
 
