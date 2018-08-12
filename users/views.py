@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from .models import User
 from .serializers import UserSerializer, RatingSerializer
+from recommender.dispatcher import add_rating
 
 @api_view(['POST'])
 @permission_classes((AllowAny,))
@@ -22,6 +23,7 @@ def create_rating(request):
     serialized = RatingSerializer(data=request.data)
     if serialized.is_valid():
         serialized.save()
+        add_rating.apply_async((request.user.training_id, serialized.data['movie'], serialized.data['rating']), queue='dispatcher')
         return Response('ok', status=status.HTTP_201_CREATED)
     else:
         return Response(serialized._errors, status=status.HTTP_400_BAD_REQUEST)

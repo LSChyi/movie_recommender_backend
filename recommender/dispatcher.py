@@ -10,7 +10,23 @@ def recommend(user_id):
 
 @app.task()
 def add_rating(user_id, movie_id, rating):
-    ratings_df.append([user_id, movie_id, rating, None], ignore_index=True)
+    global ratings_df, queued_df
+    ratings_df = ratings_df.append({
+            'user_id': user_id,
+            'movie_id': movie_id,
+            'rating': rating,
+            'timestamp': None
+        },
+        ignore_index=True
+    )
+    queued_df = queued_df.append({
+            'user_id': user_id,
+            'movie_id': movie_id,
+            'rating': rating,
+            'timestamp': None
+        },
+        ignore_index=True
+    )
 
 if __name__ == '__main__':
     import numpy as np
@@ -25,4 +41,5 @@ if __name__ == '__main__':
     model.user_factors = np.load('recommender/user_factors.npy')
     model.item_factors = np.load('recommender/item_factors.npy')
     user_items = ratings.tocsr()
+    queued_df = pd.DataFrame([], columns=ratings_df.columns)
     app.worker_main()
