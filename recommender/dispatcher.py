@@ -46,7 +46,10 @@ def run_runtine():
                 train_task = None
         if queue:
             train_task = train.apply_async((queue,), queue='trainer')
-            # TODO save queue
+            with open('recommender/ratings.csv', 'a') as f:
+                writer = csv.writer(f)
+                for row in queue:
+                    writer.writerow(row)
             queue = []
 
 if __name__ == '__main__':
