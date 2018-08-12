@@ -11,8 +11,11 @@ app.conf.update(worker_concurrency=1, task_default_queue='dispatcher')
 def recommend(user_id):
     global user_items, model
     user_id = user_id + user_offset
-    l = model.recommend(userid=user_id, user_items=user_items, N=30)
-    return list(map(lambda id: int(id[0]) , l))
+    if user_id < len(model.user_factors):
+        l = model.recommend(userid=user_id, user_items=user_items, N=30)
+        return list(map(lambda id: int(id[0]) , l))
+    else:
+        return []
 
 @app.task
 def add_rating(user_id, movie_id, rating):
