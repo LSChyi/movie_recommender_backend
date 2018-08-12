@@ -1,11 +1,16 @@
 from celery import Celery
 
-app = Celery('recommender.trainer', broker='redis://localhost', backend='redis://localhost')
-app.conf.update(worker_concurrency=1, task_default_queue='trainer')
+app = Celery('recommender.dispatcher', broker='redis://localhost', backend='redis://localhost')
+app.conf.update(worker_concurrency=1, task_default_queue='dispatcher')
 
 @app.task()
-def train():
-    model.fit(40 * ratings)
+def recommend(user_id):
+    l = model.recommend(userid=user_id, user_items=user_items, N=30)
+    return list(map(lambda id: int(id[0]) , l))
+
+@app.task()
+def add_rating(user_id, movie_id, rating):
+    ratings_df.append([user_id, movie_id, rating, None], ignore_index=True)
 
 if __name__ == '__main__':
     import numpy as np

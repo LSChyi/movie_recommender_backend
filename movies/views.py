@@ -6,13 +6,13 @@ from rest_framework.response import Response
 from .models import Movie, MovieTrailer
 from users.models import Rating
 from .serializers import MovieSerializer, MovieTrailerSerializer
-from recommender.trainer import train, recommend
+from recommender.dispatcher import recommend
 
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 def get_recommendations(request):
     if Rating.objects.filter(user=request.user).exists():
-        selected_ids = recommend.delay(request.user.training_id).get()
+        selected_ids = recommend.apply_async((request.user.training_id,), queue='dispatcher').get()
         rated = Rating.objects.filter(user=request.user, movie__in=selected_ids)
         for rating in rated:
             if rating.movie.id in selected_ids:
