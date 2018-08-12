@@ -13,10 +13,12 @@ from recommender.dispatcher import recommend
 def get_recommendations(request):
     if Rating.objects.filter(user=request.user).exists():
         selected_ids = recommend.apply_async((request.user.training_id,), queue='dispatcher').get()
+        print(len(selected_ids))
         rated = Rating.objects.filter(user=request.user, movie__in=selected_ids)
         for rating in rated:
             if rating.movie.id in selected_ids:
                 selected_ids.remove(rating.movie.id)
+        print(len(selected_ids))
         selected_ids = selected_ids[:10]
     else:
         movie_num = Movie.objects.all().count()
