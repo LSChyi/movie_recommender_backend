@@ -5,6 +5,11 @@ movie_recommender/
 movies/movies.csv
 movies/trailers.csv
 
+# training model
+recommender/ratings.csv
+recommender/user_factors.npy
+recommender/item_factors.npy
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
