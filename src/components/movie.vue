@@ -22,7 +22,7 @@
       >
       <div class="d-block text-center">
         <div style="margin: 12px">
-          <b-form-input type="range" max="5" min="1" v-model="score"></b-form-input>
+          <b-form-input type="range" max=5 min=1 v-model="score"></b-form-input>
           score: {{ score }}
           <br />
           <synchronize-button
@@ -75,7 +75,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios.post('/users/ratings/', {
           movie: this.movie.id,
-          rating: this.score.toFixed(1)
+          rating: parseInt(this.score).toFixed(1)
         })
           .then((res) => {
             this.$emit('movieRated', this.movie.id)
