@@ -11,8 +11,13 @@ from recommender.trainer import train, recommend
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 def get_recommendations(request):
-    if Rating.objects.filter(user = request.user).exists():
+    if Rating.objects.filter(user=request.user).exists():
         selected_ids = recommend.delay(request.user.training_id).get()
+        rated = Rating.objects.filter(user=request.user, movie__in=selected_ids)
+        for rating in rated:
+            if rating.movie.id in selected_ids:
+                selected_ids.remove(rating.movie.id)
+        selected_ids = selected_ids[:10]
     else:
         movie_num = Movie.objects.all().count()
         selected_ids = sample(range(movie_num), 10)
