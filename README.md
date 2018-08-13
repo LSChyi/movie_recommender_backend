@@ -39,6 +39,14 @@ The recommender is stored in the `recommender` forlder, which will run a trainer
 
 There are prepared `ratings.csv`, `user_factors.npy` and `item_factors.npy` on [Google drive](https://drive.google.com/drive/folders/12S23JHsicDod5VQ4kIDeOfhZs1MQYSTP). Note: the user id and movie id are rearranged. Movie id is the same as the prepared `movies.csv` and `trailers.csv` on above. User id is rearranged with starting id 0, and all ids are consective. The ratings are from the 10M dataset.
 
+## Setup Frontend Project
+The [frontend project](https://github.com/LSChyi/movie_recommender_frontend) is embedded with git subtree. To install the project, cd to `frontend` directory, and run:
+
+	yarn install
+	yarn run build
+	
+, and the production frontend files are generated in the `frontend/dist` directory.
+
 # Running
 To run this project, there are at leat three processes are running. One is to server the django, one is the trainer to train model, and one is a model cache and ratings cache between django and the trainer. These processes are communicated through redis.
 
