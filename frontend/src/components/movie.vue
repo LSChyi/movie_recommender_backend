@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     open_modal () {
-      this.$emit('changeModal')
+      this.$emit('changeModal', 'pause')
       axios.get(`/movies/${this.movie.id}/trailers/`)
         .then((res) => {
           this.trailers = res.data
@@ -69,7 +69,7 @@ export default {
       this.$refs[`modal_${this.movie.id}`].show()
     },
     hide_modal () {
-      this.$emit('changeModal')
+      this.$emit('changeModal', 'resume')
     },
     rate_movie () {
       return new Promise((resolve, reject) => {

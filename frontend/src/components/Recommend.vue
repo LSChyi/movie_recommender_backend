@@ -77,12 +77,24 @@ export default {
           .then(() => this.start_countdown())
       }
     },
-    pause_resume () {
-      if (this.countdown.timer) {
-        clearTimeout(this.countdown.timer)
-        this.countdown.timer = null
+    pause_resume (action = undefined) {
+      if (typeof(action) === 'string') {
+        console.log(action)
+        if (action == 'pause') {
+          if (this.countdown.timer) {
+            clearTimeout(this.countdown.timer)
+            this.countdown.timer = null
+          }
+        } else if (action == 'resume') {
+          this.count_minus()
+        }
       } else {
-        this.count_minus()
+        if (this.countdown.timer) {
+          clearTimeout(this.countdown.timer)
+          this.countdown.timer = null
+        } else {
+          this.count_minus()
+        }
       }
     },
     removeMovie (movie_id) {
