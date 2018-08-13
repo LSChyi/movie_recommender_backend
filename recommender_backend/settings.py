@@ -60,7 +60,7 @@ ROOT_URLCONF = 'recommender_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ 'frontend/dist' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -151,3 +151,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 SITE_ID = 1
+
+# Add for vuejs
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "frontend/dist/static"),
+]
