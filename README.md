@@ -26,6 +26,8 @@ There is a script to import movie data into database. Place your `movies.csv` an
 
 to import the movie data from Movielens.
 
+There are prepared `movies.csv` and `trailers.csv` on [Google drive](https://drive.google.com/drive/folders/1R_pKTIhejiKSQNf44oGTwmAQwC8oi1iu). Note: the movie id is rearranged with starting id 0, and all ids are consecutive. The movies are from the 10M dataset.
+
 ## Place Model and Rating File
 The recommender is stored in the `recommender` forlder, which will run a trainer and a dispatcher when runner the website. These two module requied some files placed in `recommender` folder, which are:
 
@@ -34,6 +36,8 @@ The recommender is stored in the `recommender` forlder, which will run a trainer
 3. `item_factors.npy`: stores movie factors
 
 , and after running, these files are automatically updated when receiving new ratings and when new model is trained.
+
+There are prepared `ratings.csv`, `user_factors.npy` and `item_factors.npy` on [Google drive](https://drive.google.com/drive/folders/12S23JHsicDod5VQ4kIDeOfhZs1MQYSTP). Note: the user id and movie id are rearranged. Movie id is the same as the prepared `movies.csv` and `trailers.csv` on above. User id is rearranged with starting id 0, and all ids are consective. The ratings are from the 10M dataset.
 
 # Running
 To run this project, there are at leat three processes are running. One is to server the django, one is the trainer to train model, and one is a model cache and ratings cache between django and the trainer. These processes are communicated through redis.
